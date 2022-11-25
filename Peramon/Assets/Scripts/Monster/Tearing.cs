@@ -7,10 +7,11 @@ using DG.Tweening;
 
 public class Tearing : MonoBehaviour
 {
-
-
     Material m_material;
-    float nowAngle = 0;
+    [SerializeField, Range(-15,15)]public float disappearPointStartLeft,disappearPointEndLeft;
+    [SerializeField, Range(-15,15)]public float disappearPointStartRight,disappearPointEndRight;
+    [SerializeField, Range(-15,15)]public float disappearPointStartUp,disappearPointEndUp;
+    [SerializeField, Range(-15,15)]public float disappearPointStartDown,disappearPointEndDown;
     bool isTeared = false;
     // Start is called before the first frame update
     void Start()
@@ -46,18 +47,21 @@ public class Tearing : MonoBehaviour
     {
         m_material.SetFloat("_AngleX", 0);
         m_material.DOFloat(180, "_AngleX", 1f);
+        Invoke("DisappearLeft",0.8f);
         TearMonster();
     }
     private void TearRight()
     {
         m_material.SetFloat("_AngleX2", 0);
         m_material.DOFloat(180, "_AngleX2", 1f);
+        Invoke("DisappearRight",0.8f);
         TearMonster();
     }
     private void TearUp()
     {
         m_material.SetFloat("_AngleY", 0);
         m_material.DOFloat(180, "_AngleY", 1f);
+        Invoke("DisappearUp",0.8f);
         TearMonster();
     }
 
@@ -65,13 +69,37 @@ public class Tearing : MonoBehaviour
     {
         m_material.SetFloat("_AngleY2", 0);
         m_material.DOFloat(180, "_AngleY2", 1f);
+        Invoke("DisappearDown",0.8f);
         TearMonster();
     }
     private void TearMonster()
     {
         isTeared = true;
-        Destroy(this.gameObject, 1.5f);
-        PlayerData.treasureGet++;
-        GameObject.Find("PlayerData").GetComponent<PlayerData>().TreasureTextUpdate();
+        Destroy(this.gameObject, 2f);
+        PlayerData playerData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
+        int monsterID = GetComponent<BaseMonster>().monsterID;
+        playerData.AddGotMonster(monsterID);
     }
+
+    private void DisappearLeft()
+    {
+        m_material.SetFloat("_DisappearOffsetX",disappearPointStartLeft);
+        m_material.DOFloat(disappearPointEndLeft, "_DisappearOffsetX", 1f);
+    }
+    private void DisappearRight()
+    {
+        m_material.SetFloat("_DisappearOffsetX2",disappearPointStartRight);
+        m_material.DOFloat(disappearPointEndRight, "_DisappearOffsetX2", 1f);
+    }
+    private void DisappearUp()
+    {
+        m_material.SetFloat("_DisappearOffsetY",disappearPointStartUp);
+        m_material.DOFloat(disappearPointEndUp, "_DisappearOffsetY", 1f);
+    }
+    private void DisappearDown()
+    {
+        m_material.SetFloat("_DisappearOffsetY2",disappearPointStartDown);
+        m_material.DOFloat(disappearPointEndDown, "_DisappearOffsetY2", 1f);
+    }
+
 }

@@ -11,6 +11,7 @@ Shader "Custom/Monster"
         _AngleX("AngleX", Range(-180,180)) = 0
         _AngleY("AngleY", Range(-180,180)) = 0
 
+        _DisappearOffset ("Disappear Offset",Range(-0.5,0.5)) = 0.5
     }
     SubShader
     {
@@ -40,7 +41,7 @@ Shader "Custom/Monster"
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;				
+				float3 uv : TEXCOORD0;				
 				float4 vertex : SV_POSITION;
 			};
 
@@ -48,6 +49,7 @@ Shader "Custom/Monster"
 			float4 _MainTex_ST;
 			float _AngleX;
             float _AngleY;
+            float _DisappearOffset;
             v2f vert (appdata v)
             {
                 v2f o;
@@ -91,7 +93,9 @@ Shader "Custom/Monster"
                 }
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				//o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv.z = _DisappearOffset - v.vertex.y;
 
                 return o;
             }

@@ -82,6 +82,10 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0
     - _DetailNormalMapScale: 1
+    - _DisappearOffsetX: 15
+    - _DisappearOffsetX2: 15
+    - _DisappearOffsetY: 15
+    - _DisappearOffsetY2: 15
     - _DstBlend: 10
     - _GlossMapScale: 1
     - _Glossiness: 0

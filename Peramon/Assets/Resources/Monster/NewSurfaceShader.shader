@@ -18,6 +18,11 @@ Shader "Unlit/PaperTurnMilkShader"
 		_WaveLength("WaveLength", Range(-2,2)) = 0.4
 		_SizeX("SizeX", Range(1,5)) = 3
 		_SizeY("SizeY", Range(1,5)) = 5
+
+		_DisappearOffsetX ("Disappear OffsetX",Range(-15,15)) = 15
+		_DisappearOffsetX2 ("Disappear OffsetX2",Range(-15,15)) = 15
+		_DisappearOffsetY ("Disappear OffsetY",Range(-15,15)) = 15
+		_DisappearOffsetY2 ("Disappear OffsetY2",Range(-15,15)) = 15
 	}
 	SubShader
 	{
@@ -43,8 +48,9 @@ Shader "Unlit/PaperTurnMilkShader"
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;				
+				float3 uv : TEXCOORD0;				
 				float4 vertex : SV_POSITION;
+				float3 worldPos:TEXCOORD2;
 			};
 
 			sampler2D _MainTex;
@@ -58,6 +64,10 @@ Shader "Unlit/PaperTurnMilkShader"
 			float _WaveLength;
 			float _SizeX;
 			float _SizeY;
+			float _DisappearOffsetX;
+			float _DisappearOffsetX2;
+			float _DisappearOffsetY;
+			float _DisappearOffsetY2;
 			
 			v2f vert (appdata v)
 			{
@@ -175,13 +185,27 @@ Shader "Unlit/PaperTurnMilkShader"
 	
 				}	
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);		
+				o.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);	
+
+				if(_DisappearOffsetX != 15)
+					o.uv.z = _DisappearOffsetX - v.vertex.x;
+				else if(_DisappearOffsetY != 15)
+					o.uv.z = _DisappearOffsetY - v.vertex.z;
+				else if(_DisappearOffsetX2 != 15)
+					o.uv.z = _DisappearOffsetX2 + v.vertex.x;
+				else if(_DisappearOffsetY2 != 15)
+					o.uv.z = _DisappearOffsetY2 + v.vertex.z;
+
+					
+
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{				
-				fixed4 col = tex2D(_MainTex, i.uv);				
+				fixed4 col = tex2D(_MainTex, i.uv);
+				clip(i.uv.z);
+		
 				return col;
 			}
 			ENDCG
