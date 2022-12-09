@@ -8,6 +8,7 @@ public class BaseMonster : MonoBehaviour
     private bool haveTreasure;
     private bool isKilled;
     private Vector3 spawnPosition;
+    [SerializeField]public int monsterID;
     // Start is called before the first frame update
     void Start()
     {
