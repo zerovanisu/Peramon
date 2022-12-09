@@ -8,14 +8,14 @@ public class TLManager : MonoBehaviour
     //ウィンドウの拡大・縮小の定義
     public enum WINDOWTYPE
     {
-        Expansion = 0, Shrink = 1//Close = 2
+        Expansion = 0, Shrink = 1, Close = 2
     }
 
-    [Header("拡大ウィンドウ")]
+    [Header("拡大されたウィンドウ")]
     [SerializeField]
     GameObject Window_B;
 
-    [Header("縮小ウィンドウ")]
+    [Header("縮小されたウィンドウ")]
     [SerializeField]
     GameObject Window_S;
 
@@ -34,44 +34,27 @@ public class TLManager : MonoBehaviour
     [SerializeField]
     float TextCount;
 
-    private float Count2;
-
     void Start()
     {
         WindowChange(WINDOWTYPE.Expansion);
-
-        Count2 = TextCount;
+        M_ID = 0;
+        MessageChange(M_ID);
     }
 
 
     void Update()
     {
-        /*if(Input.GetKeyDown(KeyCode.Z))
+        //デバッグ用メッセージ進行
+        if(Input.GetKeyDown(KeyCode.Z))
         {
-            M_ID += 1;
-            MessageChange(M_ID);
-        }*/
-
-        Count2 -= Time.deltaTime;
-
-        if (Count2 <= 0)
-        {
-            if(M_ID != Message.Length - 1)
-            {
-                M_ID += 1;
-                MessageChange(M_ID);
-                Count2 = TextCount;
-            }
+            NextMessage();
         }
-        
     }
 
     public void WindowOpen()
     {
         WindowChange(WINDOWTYPE.Expansion);
-        M_ID = 1;
         MessageChange(M_ID);
-        Count2 = TextCount;
     }
 
     public void WindowClose()
@@ -94,13 +77,35 @@ public class TLManager : MonoBehaviour
                 Window_S.SetActive(true);
                 break;
 
-            /*case WINDOWTYPE.Close:
-                break;*/
+            case WINDOWTYPE.Close:
+                Window_B.SetActive(false);
+                Window_S.SetActive(false);
+                break;
         }
     }
 
     void MessageChange(int x)
     {
         TextBox.text = Message[x];
+    }
+
+    public void NextMessage()
+    {
+        //効果音を入れる
+
+        //最後のメッセージだったら
+        int i = Message.Length - 1;
+        if (M_ID == i)
+        {
+            Debug.Log("ゲームスタート");
+            //ゲームスタート
+        }
+        //そうでない場合
+        else
+        {
+            //メッセージ進行
+            M_ID += 1;
+            MessageChange(M_ID);
+        }
     }
 }
