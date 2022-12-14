@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 public class PlayerData : MonoBehaviour
 {
     public static int treasureGet = 0;
-    [SerializeField]public Text scoreText;
+    [SerializeField] public Text scoreText;
     public List<int> gotMonster = new List<int>();
+    private bool toResult = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +19,13 @@ public class PlayerData : MonoBehaviour
 
     void Update()
     {
-        if(gotMonster.Count >= 5 && SceneManager.GetActiveScene().name != "ResultTest")
-            SceneManager.LoadScene("ResultTest");
+        ResultCheck();
     }
-    
+
     public void TreasureTextUpdate()
     {
-        scoreText.text = "見つけたお宝：" + gotMonster.Count; 
+        scoreText = GameObject.Find("Score").GetComponent<Text>();
+        scoreText.text = "見つけたお宝：" + gotMonster.Count;
     }
 
     public void AddGotMonster(int monsterID)
@@ -32,4 +33,29 @@ public class PlayerData : MonoBehaviour
         gotMonster.Add(monsterID);
         TreasureTextUpdate();
     }
+
+    private void ResultCheck(int count = 5)
+    {
+        if (gotMonster.Count >= count && !toResult)
+        {
+            toResult = true;
+            StartCoroutine(MoveToResult());
+        }
+    }
+
+    IEnumerator MoveToResult()
+    {
+        Debug.Log("ToResult");
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(2);
+        Debug.Log("ToResult2");
+    }
+
+    public void ResetData()
+    {
+        treasureGet = 0;
+        gotMonster.Clear();
+        toResult = false;
+    }
+
 }

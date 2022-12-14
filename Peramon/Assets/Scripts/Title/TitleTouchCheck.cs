@@ -1,36 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class TouchCheck : MonoBehaviour
+public class TitleTouchCheck : TouchCheck
 {
-    [SerializeField]protected Camera arCamera;
-    protected float minSwipeDistX = 50, minSwipeDistY = 50;
-    protected float swipeDistX, swipeDistY;
-    protected float directionX, directionY;
-    protected Vector2 startPos, endPos;
-    protected Tearing tearing;
-
-    public enum Direction
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
 
 
-
-    void Start()
-    {
-    }
-
+    // Update is called once per frame
     void Update()
     {
-        TouchDetect();
+        
     }
-
     private void TouchDetect()
     {
         //タッチされたら
@@ -45,6 +25,9 @@ public class TouchCheck : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out hitObject))
                 {
+                    // m_score++;
+                    // score.text = m_score + "/5";
+
                     tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
                     //Destroy(hitObject.transform.gameObject);
                 }
@@ -127,7 +110,4 @@ public class TouchCheck : MonoBehaviour
         }
         //タッチフェーズによって場合分け
     }
-
 }
-
-
