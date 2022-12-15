@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseMonster : MonoBehaviour
 {
-    private bool isSpecial;
+    public bool isSpecial;
     private bool haveTreasure;
     private bool isKilled;
     private Vector3 spawnPosition;
