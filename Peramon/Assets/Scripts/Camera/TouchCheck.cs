@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TouchCheck : MonoBehaviour
 {
     [SerializeField]protected Camera arCamera;
-    protected float minSwipeDistX = 50, minSwipeDistY = 50;
+    protected float minSwipeDistX = 250, minSwipeDistY = 250;   //モンスターを剥がすの必要な距離
     protected float swipeDistX, swipeDistY;
     protected float directionX, directionY;
     protected Vector2 startPos, endPos;
@@ -46,7 +46,6 @@ public class TouchCheck : MonoBehaviour
                 if (Physics.Raycast(ray, out hitObject))
                 {
                     tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
-                    //Destroy(hitObject.transform.gameObject);
                 }
             }
             switch (touch.phase)
@@ -63,11 +62,7 @@ public class TouchCheck : MonoBehaviour
 
                         if (Physics.Raycast(ray, out hitObject))
                         {
-                            // m_score++;
-                            // score.text = m_score + "/5";
-
                             tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
-                            //Destroy(hitObject.transform.gameObject);
                         }
                     }
 

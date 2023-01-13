@@ -104,7 +104,11 @@ Shader "Custom/Monster"
             {
                 //コンテンツとページテクスチャ色取得
 				float4 col = tex2D(_MainTex, i.uv);
-
+                //背面のカラー
+                float4 backcol = tex2D(_MainTex, i.uv);
+                //RGB * 0.6
+                //Alpha値調整
+                //
 				return col;
             }
 

@@ -20,8 +20,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5e7edc76358aa451d9cef207ea969401, type: 3}
-        m_Scale: {x: 1, y: 1.5}
+        m_Texture: {fileID: 2800000, guid: b02340fe3f06b46d7ab1d81b609054de, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
@@ -29,15 +29,15 @@ Material:
     - _AngleX2: 0
     - _AngleY: 0
     - _AngleY2: 0
-    - _Cutoff: 0.5
+    - _Cutoff: 0
     - _DisappearOffsetX: 15
     - _DisappearOffsetX2: 15
     - _DisappearOffsetY: 15
     - _DisappearOffsetY2: 15
-    - _SizeX: 3
-    - _SizeY: 5
+    - _SizeX: 4.44
+    - _SizeY: 3.03
     - _WaveLength: -0.42
-    - _WeightX: 0
+    - _WeightX: 0.5
     - _WeightY: 1.97
     m_Colors: []
   m_BuildTextureStacks: []
