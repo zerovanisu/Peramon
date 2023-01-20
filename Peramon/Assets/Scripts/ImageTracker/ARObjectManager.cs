@@ -10,10 +10,7 @@ public class ARObjectManager : MonoBehaviour
 
     private void Awake()
     {
-        foreach (GameObject g in _arObjs)
-        {
-            //g.SetActive(false);
-        }
+        
     }
 
     public GameObject GetArObjByNum(int _pageNum)
