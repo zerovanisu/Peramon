@@ -30,6 +30,28 @@ public class TouchCheck : MonoBehaviour
     {
         TouchDetect();
     }
+    #region 特殊ぺらもん
+    private void SpecialMonster(int i , GameObject obj, BaseMonster baseMonster)
+    {
+        //MonsterIDで分岐
+        switch(i)
+        {
+            case 0:
+                {
+                    var specialMonster = obj.GetComponent<SpecialMonster>();
+                    specialMonster.onClickAct();
+                    if (specialMonster.clickCount < 3) //Clickが三回になったらisSpecialをtrueにする
+                    baseMonster.isSpecial = false;
+                    break;
+                }
+            default:
+            {
+                break;
+            }
+        
+        }
+    }
+    #endregion
 
     private void TouchDetect()
     {

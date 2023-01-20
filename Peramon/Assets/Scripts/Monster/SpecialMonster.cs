@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class SpecialMonster : MonoBehaviour
 {
     [SerializeField]
-    private int clickCount;
+    public int clickCount;
     [SerializeField]
     private int count;
     public GameObject player;  //①動かしたいオブジェクトをインスペクターから入れる。
