@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2156621126292283365}
   - component: {fileID: 9169879499334164200}
+  - component: {fileID: -8547392075866735306}
   m_Layer: 0
   m_Name: Garake
   m_TagString: Untagged
@@ -46,6 +47,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_camera: {fileID: 0}
+--- !u!114 &-8547392075866735306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450722487336208116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71657942ac194a78ac97296a5e1536d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomRange: 0.2
 --- !u!1 &9058447979298624533
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSpecial: 0
   haveTreasure: 0
+  touchCount: 0
   monsterID: 2
 --- !u!114 &6094589107094257438
 MonoBehaviour:
@@ -194,3 +209,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71657942ac194a78ac97296a5e1536d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _randomRange: 1

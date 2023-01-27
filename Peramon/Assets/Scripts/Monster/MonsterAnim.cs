@@ -5,17 +5,19 @@ using UnityEngine;
 public class MonsterAnim : MonoBehaviour
 {
     BaseMonster _baseMonster;
-    [SerializeField]float _randomRange = 1f;
+    [SerializeField] float _randomRange = 1f;
+    Vector3 newPos;
     // Start is called before the first frame update
     void Start()
     {
         _baseMonster = transform.GetChild(0).gameObject.GetComponent<BaseMonster>();
+        StartCoroutine(NewMoveVector());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_baseMonster.isSpecial == true)
+        if (_baseMonster.isSpecial)
         {
             SpecialAnim();
         }
@@ -23,7 +25,15 @@ public class MonsterAnim : MonoBehaviour
 
     void SpecialAnim()
     {
-        Vector3 newPos = new Vector3(Random.Range(-_randomRange, _randomRange) * Time.deltaTime, Random.Range(-_randomRange, _randomRange) * Time.deltaTime, Random.Range(-_randomRange, _randomRange) * Time.deltaTime);
-        this.gameObject.transform.position += newPos;
+        this.gameObject.transform.position += newPos * Time.deltaTime;
+    }
+
+    IEnumerator NewMoveVector()
+    {
+        while (true)
+        {
+            newPos = new Vector3(Random.Range(-_randomRange, _randomRange), 0f, Random.Range(-_randomRange, _randomRange));
+            yield return new WaitForSeconds(3f);
+        }
     }
 }

@@ -16,7 +16,11 @@ public class MarkerModelSwitcher : MonoBehaviour
     {
         GameObject monster;
         monster = Instantiate(_arObjManager.GetArObjByNum(RandomMonsterNum(imageNum)), pos, rot);
-        //monster.GetComponent<BaseMonster>().isSpecial = RandomMonsterSpecial();
+        BaseMonster _baseMonster = monster.transform.GetChild(0).gameObject.GetComponent<BaseMonster>();
+        _baseMonster.isSpecial = RandomMonsterSpecial(30);
+        _baseMonster.isSpecial = true ? 
+                                        _baseMonster.haveTreasure = RandomMonsterSpecial(80) : 
+                                        _baseMonster.haveTreasure = RandomMonsterSpecial(50) ;
         Debug.Log("Spawn");
     }
 
@@ -38,8 +42,8 @@ public class MarkerModelSwitcher : MonoBehaviour
         return _id;
     }
 
-    private bool RandomMonsterSpecial()
+    private bool RandomMonsterSpecial(int _prob)
     {
-        return Random.Range(0, 2) == 0;
+        return Random.Range(0, 100) < _prob;
     }
 }

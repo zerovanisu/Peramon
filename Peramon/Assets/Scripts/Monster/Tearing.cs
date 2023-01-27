@@ -90,10 +90,19 @@ public class Tearing : MonoBehaviour
     private void TearMonster()
     {
         isTeared = true;
-
+        
         //モンスターを破壊する
         Destroy(this.gameObject, 2f);
+        if(GetComponent<BaseMonster>().haveTreasure) SpawnTreasure();
         AddTearMonster();
+    }
+
+    /// <summary>
+    /// 宝を生成
+    /// </summary>
+    private void SpawnTreasure()
+    {
+        //宝生成の処理
     }
 
     /// <summary>
