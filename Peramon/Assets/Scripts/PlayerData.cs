@@ -9,7 +9,7 @@ public class PlayerData : MonoBehaviour
     public static int treasureGet = 0;
     [SerializeField] public Text scoreText;
     public List<int> gotMonster = new List<int>();
-    private bool toResult = false;
+   [SerializeField] private int _resultMonsterNum = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +19,9 @@ public class PlayerData : MonoBehaviour
 
     void Update()
     {
-        ResultCheck();
     }
 
-    public void TreasureTextUpdate()
+    private void TreasureTextUpdate()
     {
         scoreText = GameObject.Find("Score").GetComponent<Text>();
         scoreText.text = "見つけたお宝：" + gotMonster.Count;
@@ -30,32 +29,42 @@ public class PlayerData : MonoBehaviour
 
     public void AddGotMonster(int monsterID)
     {
+        //タイトル画面の画像が剥がした場合
+        if (monsterID == -1)
+        {
+            StartCoroutine(MoveToMainScene());
+            return;
+        }
+
         gotMonster.Add(monsterID);
         TreasureTextUpdate();
+        ResultCheck();
     }
 
-    private void ResultCheck(int count = 5)
+    private void ResultCheck()
     {
-        if (gotMonster.Count >= count && !toResult)
+        if (gotMonster.Count >= _resultMonsterNum)
         {
-            toResult = true;
             StartCoroutine(MoveToResult());
         }
     }
 
     IEnumerator MoveToResult()
     {
-        Debug.Log("ToResult");
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(2);
-        Debug.Log("ToResult2");
     }
 
+    IEnumerator MoveToMainScene()
+    {
+        yield return new WaitForSeconds(1f);
+        ResetData();
+        SceneManager.LoadScene(1);
+    }
     public void ResetData()
     {
         treasureGet = 0;
         gotMonster.Clear();
-        toResult = false;
     }
 
 }

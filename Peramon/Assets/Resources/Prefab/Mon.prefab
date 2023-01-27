@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2991148838457297573}
   - component: {fileID: 8918559225033436935}
   - component: {fileID: 7514323135253972570}
+  - component: {fileID: 3819562757907175608}
   m_Layer: 0
   m_Name: Mon_Texture
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106490194828323551}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.903, y: 0.174, z: -0.792}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.050000004, z: 0.050000004}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -132,7 +133,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfcd19931ed7495591e6b304e5fcd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpecial: 0
+  haveTreasure: 0
   monsterID: 0
+--- !u!114 &3819562757907175608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106490194828323551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71657942ac194a78ac97296a5e1536d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8890905885715167166
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8890905885715167166}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.354, y: 0, z: 0.056}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

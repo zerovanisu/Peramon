@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450722487336208116}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.50930804, y: 0.46790624, z: 1.4852833}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 7611605336600742335}
   - component: {fileID: 5917874302080404572}
   - component: {fileID: 3997279928080401483}
+  - component: {fileID: 6094589107094257438}
   m_Layer: 0
   m_Name: Garake_Texture
   m_TagString: Untagged
@@ -178,4 +179,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfcd19931ed7495591e6b304e5fcd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpecial: 0
+  haveTreasure: 0
   monsterID: 2
+--- !u!114 &6094589107094257438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058447979298624533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71657942ac194a78ac97296a5e1536d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

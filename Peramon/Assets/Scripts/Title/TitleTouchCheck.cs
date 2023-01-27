@@ -28,7 +28,7 @@ public class TitleTouchCheck : TouchCheck
                     // m_score++;
                     // score.text = m_score + "/5";
 
-                    tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
+                    _tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
                     //Destroy(hitObject.transform.gameObject);
                 }
             }
@@ -49,7 +49,7 @@ public class TitleTouchCheck : TouchCheck
                             // m_score++;
                             // score.text = m_score + "/5";
 
-                            tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
+                            _tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
                             //Destroy(hitObject.transform.gameObject);
                         }
                     }
@@ -77,11 +77,11 @@ public class TitleTouchCheck : TouchCheck
 
                         if (directionX > 0)
                         {
-                            tearing.TearDirection(Direction.Left);
+                            _tearing.TearDirection(Direction.Left);
                         }
                         else if (directionX < 0)
                         {
-                            tearing.TearDirection(Direction.Right);
+                            _tearing.TearDirection(Direction.Right);
                         }
                     }
 
@@ -98,11 +98,11 @@ public class TitleTouchCheck : TouchCheck
 
                         if (directionY > 0)
                         {
-                            tearing.TearDirection(Direction.Up);
+                            _tearing.TearDirection(Direction.Up);
                         }
                         else if (directionY < 0)
                         {
-                            tearing.TearDirection(Direction.Down);
+                            _tearing.TearDirection(Direction.Down);
                         }
                     }
                     break;
