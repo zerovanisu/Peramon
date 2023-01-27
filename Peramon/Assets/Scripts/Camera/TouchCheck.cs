@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class TouchCheck : MonoBehaviour
 {
-    [SerializeField]protected Camera arCamera;
+    [SerializeField] protected Camera arCamera;
     protected float minSwipeDistX = 250, minSwipeDistY = 250;   //モンスターを剥がすの必要な距離
     protected float swipeDistX, swipeDistY;
     protected float directionX, directionY;
     protected Vector2 startPos, endPos;
-    protected Tearing tearing;
+    protected Tearing _tearing;
+    protected BaseMonster _baseMonster;
 
     public enum Direction
     {
@@ -45,7 +46,8 @@ public class TouchCheck : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out hitObject))
                 {
-                    tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
+                    _tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
+                    _baseMonster = hitObject.transform.gameObject.GetComponent<BaseMonster>();
                 }
             }
             switch (touch.phase)
@@ -62,7 +64,7 @@ public class TouchCheck : MonoBehaviour
 
                         if (Physics.Raycast(ray, out hitObject))
                         {
-                            tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
+                            _tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
                         }
                     }
 
@@ -73,6 +75,12 @@ public class TouchCheck : MonoBehaviour
                 //タッチ終了時
                 case TouchPhase.Ended:
 
+                    //スペシャルモンスターの処理
+                    if (_baseMonster.isSpecial)
+                    {
+                        _baseMonster.touchCount++;
+                        break;
+                    }
 
                     //タッチ終了のポジションをendPosに代入
                     endPos = new Vector2(touch.position.x, touch.position.y);
@@ -89,11 +97,11 @@ public class TouchCheck : MonoBehaviour
 
                         if (directionX > 0)
                         {
-                            tearing.TearDirection(Direction.Left);
+                            _tearing.TearDirection(Direction.Left);
                         }
                         else if (directionX < 0)
                         {
-                            tearing.TearDirection(Direction.Right);
+                            _tearing.TearDirection(Direction.Right);
                         }
                     }
 
@@ -110,11 +118,11 @@ public class TouchCheck : MonoBehaviour
 
                         if (directionY > 0)
                         {
-                            tearing.TearDirection(Direction.Up);
+                            _tearing.TearDirection(Direction.Up);
                         }
                         else if (directionY < 0)
                         {
-                            tearing.TearDirection(Direction.Down);
+                            _tearing.TearDirection(Direction.Down);
                         }
                     }
                     break;

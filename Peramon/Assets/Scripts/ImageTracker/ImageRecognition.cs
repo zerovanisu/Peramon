@@ -24,7 +24,7 @@ public class ImageRecognition : MonoBehaviour
         {
             _name = a.referenceImage.name;
             _nameNum = int.Parse (_name);//画像番号
-            //Debug.Log(_nameNum);
+            Debug.Log(_nameNum);
             Vector3 markerPos = a.transform.position;
             Quaternion qua = a.transform.rotation;
             _markerModelSwitcher.SpawningObject(_nameNum, markerPos, qua);

@@ -159,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 617}
-  m_SizeDelta: {x: 1080, y: 250}
+  m_AnchoredPosition: {x: 0, y: 800}
+  m_SizeDelta: {x: 2000, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &135378769
 MonoBehaviour:
@@ -236,7 +236,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 200}
+  m_SizeDelta: {x: 2000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549672343
 MonoBehaviour:
@@ -260,11 +260,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 36
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 40
+    m_MaxSize: 74
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -468,7 +468,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 1920}
+  m_SizeDelta: {x: 4000, y: 4000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1129224048
 MonoBehaviour:
@@ -631,23 +631,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0658f3adfcf404bad8eef8c547020d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagePos:
-  - {x: 135, y: 907, z: 0}
-  - {x: 375, y: 907, z: 0}
-  - {x: 615, y: 907, z: 0}
-  - {x: 135, y: 607, z: 0}
-  - {x: 375, y: 607, z: 0}
-  - {x: 615, y: 607, z: 0}
-  - {x: 135, y: 307, z: 0}
-  - {x: 375, y: 307, z: 0}
-  - {x: 615, y: 307, z: 0}
-  monsterImage:
-  - {fileID: 5010720587513601356, guid: 999c7a7e2bfc24cc5b4ced7f7df8f381, type: 3}
-  - {fileID: 2263016599204509159, guid: dbafad613a35c445fa97597c4ee42927, type: 3}
-  - {fileID: 1344974972826425677, guid: 49698c45b52d441a6851f53933b011d5, type: 3}
-  - {fileID: 623598786854262846, guid: 26ffd1949edf847f08187e23ac61fc2b, type: 3}
-  - {fileID: 5107938209544055862, guid: df9a6af3329e14964bcc1b4c50861787, type: 3}
-  transform: {fileID: 2036331552}
+  _imagePos: []
+  _monsterImage: []
+  _transform: {fileID: 0}
 --- !u!4 &1624899468
 Transform:
   m_ObjectHideFlags: 0
@@ -656,7 +642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624899466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 851.88837, y: 1048.9513, z: -7.9522905}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -711,11 +697,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -731,7 +717,7 @@ Canvas:
   m_GameObject: {fileID: 2036331548}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1127660532}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

@@ -90,16 +90,26 @@ public class Tearing : MonoBehaviour
     private void TearMonster()
     {
         isTeared = true;
-
-        //タイトル画面の画像が剥がした場合
-        if (GetComponent<BaseMonster>().monsterID == -1)
-        {
-            StartCoroutine(MoveToMainScene());
-            return;
-        }
-
+        
         //モンスターを破壊する
         Destroy(this.gameObject, 2f);
+        if(GetComponent<BaseMonster>().haveTreasure) SpawnTreasure();
+        AddTearMonster();
+    }
+
+    /// <summary>
+    /// 宝を生成
+    /// </summary>
+    private void SpawnTreasure()
+    {
+        //宝生成の処理
+    }
+
+    /// <summary>
+    /// 剥がしたモンスターをセーフする
+    /// </summary>
+    private void AddTearMonster()
+    {
         //PlayerDataを検索
         PlayerData playerData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
         //モンスターIDを取得
@@ -107,7 +117,6 @@ public class Tearing : MonoBehaviour
         //PlayerDataへ剥がしたモンスターのIDを送る
         playerData.AddGotMonster(monsterID);
     }
-
 
     /// <summary>
     /// モンスターが消える方向
@@ -146,13 +155,5 @@ public class Tearing : MonoBehaviour
         m_material.DOFloat(disappearPointEndDown, "_DisappearOffsetY2", 1f);
     }
 
-    /// <summary>
-    /// メインシーンへ移動
-    /// </summary>
-    IEnumerator MoveToMainScene()
-    {
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(1);
-    }
 
 }

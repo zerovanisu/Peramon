@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Result : MonoBehaviour
 {
-    [SerializeField] public Vector3[] imagePos;
-    [SerializeField] public GameObject[] monsterImage;
-    [SerializeField] public Transform transform;
-    PlayerData playerData;
+    [SerializeField] public Vector3[] _imagePos;
+    [SerializeField] public GameObject[] _monsterImage;
+    [SerializeField] public Transform _transform;
+    PlayerData _playerData;
     private bool resultEnd = false;
 
     List<int> gotMonster;
@@ -17,7 +17,7 @@ public class Result : MonoBehaviour
     {
         resultEnd = false;
         gotMonster = new List<int>();
-        playerData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
+        _playerData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
         StartCoroutine("ResultImage", 0.5f);
     }
 
@@ -26,18 +26,25 @@ public class Result : MonoBehaviour
         ToTitle();
     }
 
+    /// <summary>
+    /// 剥がしたモンスターの画像生成
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ResultImage()
     {
-        gotMonster.AddRange(playerData.gotMonster);
+        gotMonster.AddRange(_playerData.gotMonster);
         for (int i = 0; i < gotMonster.Count; i++)
         {
-            Instantiate(monsterImage[gotMonster[i]], imagePos[i], Quaternion.identity, transform);
+            Instantiate(_monsterImage[gotMonster[i]], _imagePos[i], Quaternion.identity, _transform);
             yield return new WaitForSeconds(0.5f);
         }
         yield return null;
         resultEnd = true;
     }
 
+    /// <summary>
+    /// タイトルへ移動
+    /// </summary>
     private void ToTitle()
     {
         if (!resultEnd)
@@ -46,7 +53,7 @@ public class Result : MonoBehaviour
         if (Input.touchCount > 0)
         {
             SceneManager.LoadScene(0);
-            playerData.ResetData();
+            _playerData.ResetData();
         }
     }
 }
