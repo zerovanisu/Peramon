@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -642,6 +642,7 @@ MonoBehaviour:
   m_AutoFocus: 1
   m_LightEstimation: 0
   m_FacingDirection: 1
+  m_RenderMode: 0
 --- !u!114 &413382390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +709,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 413382387}
+  m_OriginBaseGameObject: {fileID: 541917199}
+  m_CameraFloorOffsetObject: {fileID: 0}
+  m_RequestedTrackingOriginMode: 0
+  m_CameraYOffset: 1.1176
 --- !u!4 &541917201
 Transform:
   m_ObjectHideFlags: 0
@@ -801,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106b3a59f0b774614bd5b20e05410feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _treasurePrefab: {fileID: 5925595887980777356, guid: 5d9142ee4ee2d44fd99fecb4614a15c1, type: 3}
   disappearPointStartLeft: 0
   disappearPointEndLeft: 0
   disappearPointStartRight: 0
