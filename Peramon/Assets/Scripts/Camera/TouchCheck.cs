@@ -42,14 +42,7 @@ public class TouchCheck : MonoBehaviour
             Touch touch = Input.touches[0];
             Ray ray = arCamera.ScreenPointToRay(touch.position);
             RaycastHit hitObject;
-            if (touch.phase == TouchPhase.Began)
-            {
-                if (Physics.Raycast(ray, out hitObject))
-                {
-                    _tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
-                    _baseMonster = hitObject.transform.gameObject.GetComponent<BaseMonster>();
-                }
-            }
+
             switch (touch.phase)
             {
 
@@ -65,13 +58,12 @@ public class TouchCheck : MonoBehaviour
                         if (Physics.Raycast(ray, out hitObject))
                         {
                             _tearing = hitObject.transform.gameObject.GetComponent<Tearing>();
+                            _baseMonster = hitObject.transform.gameObject.GetComponent<BaseMonster>();
                         }
                     }
 
                     break;
-
-
-
+                
                 //タッチ終了時
                 case TouchPhase.Ended:
 

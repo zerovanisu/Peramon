@@ -51,7 +51,7 @@ public class Tearing : MonoBehaviour
     {
         m_material.SetFloat("_AngleX", 0);
         m_material.DOFloat(180, "_AngleX", 1f);
-        Invoke("DisappearLeft", 0.8f);
+        Invoke("DisappearLeft", 0.5f);
         TearMonster();
     }
     /// <summary>
@@ -61,7 +61,7 @@ public class Tearing : MonoBehaviour
     {
         m_material.SetFloat("_AngleX2", 0);
         m_material.DOFloat(180, "_AngleX2", 1f);
-        Invoke("DisappearRight", 0.8f);
+        Invoke("DisappearRight", 0.5f);
         TearMonster();
     }
     /// <summary>
@@ -71,7 +71,7 @@ public class Tearing : MonoBehaviour
     {
         m_material.SetFloat("_AngleY", 0);
         m_material.DOFloat(180, "_AngleY", 1f);
-        Invoke("DisappearUp", 0.8f);
+        Invoke("DisappearUp", 0.5f);
         TearMonster();
     }
 
@@ -82,7 +82,7 @@ public class Tearing : MonoBehaviour
     {
         m_material.SetFloat("_AngleY2", 0);
         m_material.DOFloat(180, "_AngleY2", 1f);
-        Invoke("DisappearDown", 0.8f);
+        Invoke("DisappearDown", 0.5f);
         TearMonster();
     }
     /// <summary>
@@ -95,7 +95,7 @@ public class Tearing : MonoBehaviour
         //モンスターを破壊する
         if(GetComponent<BaseMonster>().haveTreasure) SpawnTreasure();
         //Invoke("SpawnTreasure", 1f);
-        AddTearMonster();
+        AddTearMonster(GetComponent<BaseMonster>().haveTreasure);
         Destroy(this.gameObject, 2f);
     }
 
@@ -113,14 +113,14 @@ public class Tearing : MonoBehaviour
     /// <summary>
     /// 剥がしたモンスターをセーフする
     /// </summary>
-    private void AddTearMonster()
+    private void AddTearMonster(bool haveTreasure = false)
     {
         //PlayerDataを検索
         PlayerData playerData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
         //モンスターIDを取得
         int monsterID = GetComponent<BaseMonster>().monsterID;
         //PlayerDataへ剥がしたモンスターのIDを送る
-        playerData.AddGotMonster(monsterID);
+        playerData.AddGotMonster(monsterID, haveTreasure);
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public class Tearing : MonoBehaviour
     private void DisappearLeft()
     {
         m_material.SetFloat("_DisappearOffsetX", disappearPointStartLeft);
-        m_material.DOFloat(disappearPointEndLeft, "_DisappearOffsetX", 1f);
+        m_material.DOFloat(disappearPointEndLeft, "_DisappearOffsetX", 0.8f);
     }
     /// <summary>
     /// モンスターが消える方向
@@ -139,7 +139,7 @@ public class Tearing : MonoBehaviour
     private void DisappearRight()
     {
         m_material.SetFloat("_DisappearOffsetX2", disappearPointStartRight);
-        m_material.DOFloat(disappearPointEndRight, "_DisappearOffsetX2", 1f);
+        m_material.DOFloat(disappearPointEndRight, "_DisappearOffsetX2", 0.8f);
     }
     /// <summary>
     /// モンスターが消える方向
@@ -148,7 +148,7 @@ public class Tearing : MonoBehaviour
     private void DisappearUp()
     {
         m_material.SetFloat("_DisappearOffsetY", disappearPointStartUp);
-        m_material.DOFloat(disappearPointEndUp, "_DisappearOffsetY", 1f);
+        m_material.DOFloat(disappearPointEndUp, "_DisappearOffsetY", 0.8f);
     }
     /// <summary>
     /// モンスターが消える方向
@@ -157,7 +157,7 @@ public class Tearing : MonoBehaviour
     private void DisappearDown()
     {
         m_material.SetFloat("_DisappearOffsetY2", disappearPointStartDown);
-        m_material.DOFloat(disappearPointEndDown, "_DisappearOffsetY2", 1f);
+        m_material.DOFloat(disappearPointEndDown, "_DisappearOffsetY2", 0.8f);
     }
 
 

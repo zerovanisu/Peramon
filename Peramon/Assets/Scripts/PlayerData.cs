@@ -6,28 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour
 {
-    public static int treasureGet = 0;
     [SerializeField] public Text scoreText;
     public List<int> gotMonster = new List<int>();
+    private int gotTreasure = 0;
    [SerializeField] private int _resultMonsterNum = 5;
     // Start is called before the first frame update
     void Start()
     {
-        treasureGet = 0;
+        gotTreasure = 0;
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    void Update()
-    {
     }
 
     private void TreasureTextUpdate()
     {
         scoreText = GameObject.Find("Score").GetComponent<Text>();
-        scoreText.text = "見つけたお宝：" + gotMonster.Count;
+        scoreText.text = "見つけたお宝：" + gotTreasure;
     }
 
-    public void AddGotMonster(int monsterID)
+    public void AddGotMonster(int monsterID, bool haveTreasure = false)
     {
         //タイトル画面の画像が剥がした場合
         if (monsterID == -1)
@@ -35,7 +31,7 @@ public class PlayerData : MonoBehaviour
             StartCoroutine(MoveToMainScene());
             return;
         }
-
+        if(haveTreasure) gotTreasure++;
         gotMonster.Add(monsterID);
         TreasureTextUpdate();
         ResultCheck();
@@ -63,7 +59,7 @@ public class PlayerData : MonoBehaviour
     }
     public void ResetData()
     {
-        treasureGet = 0;
+        gotTreasure = 0;
         gotMonster.Clear();
     }
 
