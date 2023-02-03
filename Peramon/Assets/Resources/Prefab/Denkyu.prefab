@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106b3a59f0b774614bd5b20e05410feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  treasure: {fileID: 5925595887980777356, guid: 5d9142ee4ee2d44fd99fecb4614a15c1, type: 3}
   disappearPointStartLeft: -2
   disappearPointEndLeft: -5.7
   disappearPointStartRight: -4.3
