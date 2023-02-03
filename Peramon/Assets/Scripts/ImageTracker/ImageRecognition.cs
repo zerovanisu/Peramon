@@ -5,10 +5,8 @@ using UnityEngine.XR.ARFoundation;
 
 public class ImageRecognition : MonoBehaviour
 {
-    [SerializeField] private MarkerModelSwitcher _markerModelSwitcher;
+    [SerializeField] private MonsterSpawner _monsterSpawner;
     [SerializeField] private ARTrackedImageManager _arTrackedImageManager;
-
-    private int _presentMarkerNum = -1;
 
     private void Awake()
     {
@@ -27,7 +25,7 @@ public class ImageRecognition : MonoBehaviour
             Debug.Log(_nameNum);
             Vector3 markerPos = a.transform.position;
             Quaternion qua = a.transform.rotation;
-            _markerModelSwitcher.SpawningObject(_nameNum, markerPos, qua);
+            _monsterSpawner.SpawningObject(_nameNum, markerPos, qua);
         }
     }
 }

@@ -7,5 +7,8 @@ public static class MonsterData
         Garake,
         Tubotubo,
         Denkyu,
+        Carpet,
+        Mai,
+        PC
     }
 }
