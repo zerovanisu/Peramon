@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Tearing : MonoBehaviour
 {
     Material m_material;
-    [SerializeField] private GameObject _treasurePrefab = null;
+    [SerializeField]GameObject treasure;
     [SerializeField, Range(-15, 15)] public float disappearPointStartLeft, disappearPointEndLeft;
     [SerializeField, Range(-15, 15)] public float disappearPointStartRight, disappearPointEndRight;
     [SerializeField, Range(-15, 15)] public float disappearPointStartUp, disappearPointEndUp;
@@ -94,8 +94,9 @@ public class Tearing : MonoBehaviour
         
         //モンスターを破壊する
         if(GetComponent<BaseMonster>().haveTreasure) SpawnTreasure();
-        Destroy(this.gameObject, 2f);
+        //Invoke("SpawnTreasure", 1f);
         AddTearMonster();
+        Destroy(this.gameObject, 2f);
     }
 
     /// <summary>
@@ -103,10 +104,10 @@ public class Tearing : MonoBehaviour
     /// </summary>
     private void SpawnTreasure()
     {
-        Vector3 posi = this.transform.position;
+        Vector3 pos = this.gameObject.transform.parent.position;
         //宝生成の処理
-        Instantiate(_treasurePrefab, this.gameObject.transform.position, Quaternion.identity);
-        Destroy(_treasurePrefab,1.5f);
+        GameObject _treasure = Instantiate(treasure, pos, Quaternion.identity);
+        Destroy(_treasure, 1.5f);
     }
 
     /// <summary>
