@@ -2,23 +2,24 @@ Shader "Unlit/PaperTurnMilkShader"
 {
 	Properties
 	{
-		//正面圖
+		//画像
 		_MainTex ("Texture", 2D) = "white" {}
-		//旋轉角度
+		//回転角度
         _Cutoff ("Alpha Cutoff", Range(0,1)) = 0.5
 		_AngleX("AngleX", Range(0,180)) = 0
 		_AngleX2("AngleX2", Range(0,180)) = 0
 		_AngleY("AngleY", Range(0,180)) = 0
 		_AngleY2("AngleY2", Range(0,180)) = 0
-		//彎曲程度
+
 		_WeightY("Weight Y", Range(0,5)) = 0.2
-		//收縮程度（值越大翻頁時紙張越往內部靠攏)具體情況可測試
+		//収縮率
 		_WeightX("Weight X", Range(-1,1)) = 0
-		//波長（值越大翻頁時的彎曲次數越多）
+		//湾曲の長さ
 		_WaveLength("WaveLength", Range(-2,2)) = 0.4
 		_SizeX("SizeX", Range(1,5)) = 3
 		_SizeY("SizeY", Range(1,5)) = 5
 
+		//消える位置
 		_DisappearOffsetX ("Disappear OffsetX",Range(-15,15)) = 15
 		_DisappearOffsetX2 ("Disappear OffsetX2",Range(-15,15)) = 15
 		_DisappearOffsetY ("Disappear OffsetY",Range(-15,15)) = 15
@@ -26,11 +27,9 @@ Shader "Unlit/PaperTurnMilkShader"
 	}
 	SubShader
 	{
-		//關閉批處理（因爲修改了頂點位置)
 		Tags { "RenderType"="TransparentCutout" "IgnoreProjector" = "True" "Queue" = "Geometry" "DisableBatching" = "True"}
 		LOD 100
 		Blend SrcAlpha OneMinusSrcAlpha
-		//渲染正面
 		Pass
 		{
 			Cull Off
@@ -73,114 +72,107 @@ Shader "Unlit/PaperTurnMilkShader"
 			{
 				v2f o;
 				if(_AngleX > 0){
-					//對頂點進行往X正方向偏移5個單位是爲了離開旋轉中心點,不然翻頁時的旋轉點是會在紙張中心進行圍繞Z軸旋轉（Z軸是紙張垂直線）
+					//頂点移動
 					v.vertex += _AngleX < 0 ? float4(-_SizeX, 0, 0, 0) : float4(_SizeX, 0, 0, 0);
 					float s;
 					float c;
-					//使用sincos獲取 sin(弧度), cos(弧度)  ，radians(角度)=弧度 ,_AngleX前加負號是控制旋轉方向，可根據DX是右手法則順時針旋轉，故應該逆向翻頁要取負數
+					//角度計算
 					sincos(radians(-_AngleX), s, c);
-					//圍繞Z軸旋轉變換矩陣
+					//回転
 					float4x4 rotate = {
 						c,s,0,0,
 						-s,c,0,0,
 						0,0,1,0,
 						0,0,0,1
 					};
-					//weight：_AngleX在[0,90]變換區間時，weight會從0變爲1；_AngleX在[90,180]變換區間時，weight會從1變爲0. 
-					//weight可理解爲是剛開始翻頁（0°）到翻頁到垂直時（90°）時，對其彎曲程度從小變大；（這個是對頂點Y值影響的結果）
-					//同理，收縮程度也是一樣道理
+					//収縮率、曲率調整
 					float weight = 1 - abs(90 - _AngleX) / 90;
 					v.vertex.y += sin(v.vertex.x * _WaveLength) * weight * _WeightY;
 					v.vertex.x -= v.vertex.x * weight * _WeightX;
-					//在進行偏移之後，再對頂點進行圍繞Z軸旋轉_AngleX角度
+					//頂点の回転
 					v.vertex = mul(rotate, v.vertex);
 
-					//之後要偏移回來，因爲我們已經做完了上面的旋轉操作了
+					//頂点移動
 					v.vertex -= _AngleX < 0 ? float4(-_SizeX, 0, 0, 0) : float4(_SizeX, 0, 0, 0);
 	
 				}	
 
 				else if(_AngleX2 > 0){
-					//對頂點進行往X正方向偏移5個單位是爲了離開旋轉中心點,不然翻頁時的旋轉點是會在紙張中心進行圍繞Z軸旋轉（Z軸是紙張垂直線）
+					//頂点移動
 					v.vertex += _AngleX2 < 0 ? float4(3, 0, 0, 0) : float4(-3, 0, 0, 0);
 					float s;
 					float c;
-					//使用sincos獲取 sin(弧度), cos(弧度)  ，radians(角度)=弧度 ,_AngleX前加負號是控制旋轉方向，可根據DX是右手法則順時針旋轉，故應該逆向翻頁要取負數
+					//角度計算
 					sincos(radians(_AngleX2), s, c);
-					//圍繞Z軸旋轉變換矩陣
+					//回転
 					float4x4 rotate = {
 						c,s,0,0,
 						-s,c,0,0,
 						0,0,1,0,
 						0,0,0,1
 					};
-					//weight：_AngleX在[0,90]變換區間時，weight會從0變爲1；_AngleX在[90,180]變換區間時，weight會從1變爲0. 
-					//weight可理解爲是剛開始翻頁（0°）到翻頁到垂直時（90°）時，對其彎曲程度從小變大；（這個是對頂點Y值影響的結果）
-					//同理，收縮程度也是一樣道理
+					//収縮率、曲率調整
 					float weight = 1 - abs(90 - _AngleX2) / 90;
 					v.vertex.y += sin(v.vertex.x * -_WaveLength) * weight * _WeightY;
 					v.vertex.x -= v.vertex.x * weight * _WeightX;
-					//在進行偏移之後，再對頂點進行圍繞Z軸旋轉_AngleX角度
+					//頂点の回転
 					v.vertex = mul(rotate, v.vertex);
 
-					//之後要偏移回來，因爲我們已經做完了上面的旋轉操作了
+					//頂点移動
 					v.vertex -= _AngleX2 < 0 ? float4(3, 0, 0, 0) : float4(-3, 0, 0, 0);
 	
 				}	
 				
 				if(_AngleY > 0){
-					//對頂點進行往X正方向偏移5個單位是爲了離開旋轉中心點,不然翻頁時的旋轉點是會在紙張中心進行圍繞Z軸旋轉（Z軸是紙張垂直線）
+					//頂点移動
 					v.vertex += _AngleY < 0 ? float4(0, 0, -_SizeY, 0) : float4(0, 0, _SizeY, 0);
 					float s;
 					float c;
-					//使用sincos獲取 sin(弧度), cos(弧度)  ，radians(角度)=弧度 ,_AngleX前加負號是控制旋轉方向，可根據DX是右手法則順時針旋轉，故應該逆向翻頁要取負數
+					//角度計算
 					sincos(radians(-_AngleY), s, c);
-					//圍繞X軸旋轉變換矩陣
+					//回転
                     float4x4 rotate = {
                         1,0,0,0,
                         0,c,-s,0,
                         0,s,c,0,
                         0,0,0,1
                     };
-					//weight：_AngleX在[0,90]變換區間時，weight會從0變爲1；_AngleX在[90,180]變換區間時，weight會從1變爲0. 
-					//weight可理解爲是剛開始翻頁（0°）到翻頁到垂直時（90°）時，對其彎曲程度從小變大；（這個是對頂點Y值影響的結果）
-					//同理，收縮程度也是一樣道理
+					//収縮率、曲率調整
 					float weight = 1 - abs(90 - _AngleY) / 90;
 					v.vertex.y += sin(v.vertex.z * _WaveLength) * weight * _WeightY;
 					v.vertex.z -= v.vertex.z * weight * _WeightX;
-					//在進行偏移之後，再對頂點進行圍繞Z軸旋轉_AngleX角度
+					//頂点の回転
 					v.vertex = mul(rotate, v.vertex);
 
-					//之後要偏移回來，因爲我們已經做完了上面的旋轉操作了
+					//頂点移動
 					v.vertex -= _AngleY < 0 ? float4(0, 0, -_SizeY, 0) : float4(0, 0, _SizeY, 0);
 	
 				}	
 
 
 				else if(_AngleY2 > 0){
-					//對頂點進行往X正方向偏移5個單位是爲了離開旋轉中心點,不然翻頁時的旋轉點是會在紙張中心進行圍繞Z軸旋轉（Z軸是紙張垂直線）
+					//頂点移動
 					v.vertex += _AngleY2 < 0 ? float4(0, 0, _SizeY, 0) : float4(0, 0, -_SizeY, 0);
 					float s;
 					float c;
-					//使用sincos獲取 sin(弧度), cos(弧度)  ，radians(角度)=弧度 ,_AngleX前加負號是控制旋轉方向，可根據DX是右手法則順時針旋轉，故應該逆向翻頁要取負數
+					//角度計算
 					sincos(radians(_AngleY2), s, c);
-					//圍繞X軸旋轉變換矩陣
+					//回転
                     float4x4 rotate = {
                         1,0,0,0,
                         0,c,-s,0,
                         0,s,c,0,
                         0,0,0,1
                     };
-					//weight：_AngleX在[0,90]變換區間時，weight會從0變爲1；_AngleX在[90,180]變換區間時，weight會從1變爲0. 
-					//weight可理解爲是剛開始翻頁（0°）到翻頁到垂直時（90°）時，對其彎曲程度從小變大；（這個是對頂點Y值影響的結果）
-					//同理，收縮程度也是一樣道理
+
+					//収縮率、曲率調整
 					float weight = 1 - abs(90 - _AngleY2) / 90;
 					v.vertex.y += sin(v.vertex.z * -_WaveLength) * weight * _WeightY;
 					v.vertex.z -= v.vertex.z * weight * _WeightX;
-					//在進行偏移之後，再對頂點進行圍繞Z軸旋轉_AngleX角度
+					//頂点の回転
 					v.vertex = mul(rotate, v.vertex);
 
-					//之後要偏移回來，因爲我們已經做完了上面的旋轉操作了
+					//頂点移動
 					v.vertex -= _AngleY2 < 0 ? float4(0, 0, _SizeY, 0) : float4(0, 0, -_SizeY, 0);
 	
 				}	
@@ -195,8 +187,6 @@ Shader "Unlit/PaperTurnMilkShader"
 					o.uv.z = _DisappearOffsetX2 + v.vertex.x;
 				else if(_DisappearOffsetY2 != 15)
 					o.uv.z = _DisappearOffsetY2 + v.vertex.z;
-
-					
 
 				return o;
 			}
