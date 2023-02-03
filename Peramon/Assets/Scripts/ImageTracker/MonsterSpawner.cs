@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarkerModelSwitcher : MonoBehaviour
+public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField]
     private ARObjectManager _arObjManager;
-
-    private int _num = 0;
-
     public GameObject _arObj { get; set; }
 
 
@@ -30,10 +27,10 @@ public class MarkerModelSwitcher : MonoBehaviour
         switch (_num)
         {
             case 0:
-                _id = Random.Range(0, 3);
+                _id = Random.Range(0, 4);
                 break;
             case 1:
-                _id = Random.Range(3, 5);
+                _id = Random.Range(5, 8);
                 break;
             default:
                 break;
