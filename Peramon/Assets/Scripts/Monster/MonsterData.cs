@@ -9,6 +9,7 @@ public static class MonsterData
         Denkyu,
         Carpet,
         Mai,
-        PC
+        PC,
+        Koibumi
     }
 }
