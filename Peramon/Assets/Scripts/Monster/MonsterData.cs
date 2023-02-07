@@ -7,5 +7,6 @@ public static class MonsterData
         Garake,
         Tubotubo,
         Denkyu,
+        Kumo
     }
 }
