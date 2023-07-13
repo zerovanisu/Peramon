@@ -194,6 +194,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpecial: 0
-  haveTreasure: 1
+  haveTreasure: 0
   touchCount: 0
-  monsterID: 3
+  monsterID: 7
