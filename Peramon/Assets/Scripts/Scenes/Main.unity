@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: treasure
       value: 
       objectReference: {fileID: 5925595887980777356, guid: 5d9142ee4ee2d44fd99fecb4614a15c1, type: 3}
+    - target: {fileID: 9169879499334164200, guid: a196467f8eaad436898a0185c473419a, type: 3}
+      propertyPath: m_camera
+      value: 
+      objectReference: {fileID: 413382392}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a196467f8eaad436898a0185c473419a, type: 3}
 --- !u!1 &143402866
@@ -398,6 +402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TuboTubo
       objectReference: {fileID: 0}
+    - target: {fileID: 5199832010268316629, guid: acf160416bae546a99839caaabd4d544, type: 3}
+      propertyPath: m_camera
+      value: 
+      objectReference: {fileID: 413382392}
     - target: {fileID: 5589817929318718737, guid: acf160416bae546a99839caaabd4d544, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -603,7 +611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9a4570a3a324d1184fe91eb4edec40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _arObjManager: {fileID: 1467414638}
 --- !u!4 &444156176
 Transform:
   m_ObjectHideFlags: 0
@@ -804,7 +811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c55425bf22534b408bf9b902809dd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _markerModelSwitcher: {fileID: 444156175}
+  _monsterSpawner: {fileID: 0}
   _arTrackedImageManager: {fileID: 541917203}
 --- !u!4 &575464275
 Transform:
@@ -832,6 +839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Foo
       objectReference: {fileID: 0}
+    - target: {fileID: 5246124077579094669, guid: af0cbe860e38b47c3b32f81e0d9ac1de, type: 3}
+      propertyPath: m_camera
+      value: 
+      objectReference: {fileID: 413382392}
     - target: {fileID: 5768625249527756029, guid: af0cbe860e38b47c3b32f81e0d9ac1de, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1125,6 +1136,10 @@ PrefabInstance:
       propertyPath: haveTreasure
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8796437512579016146, guid: 7db9f14dab36546cd8be96edeab07868, type: 3}
+      propertyPath: m_camera
+      value: 
+      objectReference: {fileID: 413382392}
     - target: {fileID: 8890905885715167166, guid: 7db9f14dab36546cd8be96edeab07868, type: 3}
       propertyPath: m_Name
       value: Mon
@@ -1256,6 +1271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Denkyu
       objectReference: {fileID: 0}
+    - target: {fileID: 5628331669205814675, guid: 9f2e3e14457754268a71607db135892e, type: 3}
+      propertyPath: m_camera
+      value: 
+      objectReference: {fileID: 413382392}
     - target: {fileID: 6138966524521387167, guid: 9f2e3e14457754268a71607db135892e, type: 3}
       propertyPath: haveTreasure
       value: 1
